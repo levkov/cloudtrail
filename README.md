@@ -21,9 +21,9 @@ Have Logstash installed, for more information on how to install: https://www.ela
 
 **SubSystem Name** – Your application probably has multiple subsystems, for example: Backend servers, Middleware, Frontend servers etc. in order to help you examine the data you need, inserting the subsystem parameter is vital.
 
-**Kinesis Stream Name** - Stream represents an ordered and immutable list of messages. Each stream has a unique name. 
+**CloudTrail S3 Bucket Name** - S3 Bucket where CludTrail store it's logs
 
-**Region** - The AWS region for Kinesis. 
+**Region** - The AWS region for S3. 
 
 ### Installation
 
@@ -68,10 +68,10 @@ output {
 }  
 ```
 **Input**  
-Kinesis stream name is mandatory. Region is optional (Default value is "us-east-1").  
+S3 Bucket name is mandatory. Region is optional (Default value is "us-east-1").  
 
 **Output**  
-The first key (config_params) is mandatory while the other two are optional. In case your input stream is a JSON object, you can extract APP_NAME and/or SUB_SYSTEM from the JSON using the $ sign. For instance, if we set our application name to be ‘$message.system’ then the system will extract “nginx” for the below message and place it under application name.  
+The first key (config_params) is mandatory while the other two are optional. 
 
 **Timestamp:**  Coralogix automatically generates the timestamp based on the log arrival time.  If you rather use your own timestamp, use the “timestamp_key_name” to specify your timestamp field, and it will be read from your log. 
 
@@ -87,7 +87,7 @@ The first key (config_params) is mandatory while the other two are optional. In 
     }
 }
 ```
-Because your AWS Kinesis input stream is a JSON object, in the case you don’t want to send the entire JSON, rather just a portion of it, you can write the value of the key you want to send in the log_key_name.
+Because your AWS CloudTrail logs are JSON object, in the case you don’t want to send the entire JSON, rather just a portion of it, you can write the value of the key you want to send in the log_key_name.
 
 For instance, in the above example, if you write log_key_name message then only the value of message key will be sent to Coralogix. If you do want to send the entire message then you can just delete this key.
 
