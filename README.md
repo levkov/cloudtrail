@@ -51,6 +51,12 @@ input {
   }
 }
 
+filter {
+  json  {
+     source => "message"
+  }
+
+}
 
 output {
     coralogix_logger { 
