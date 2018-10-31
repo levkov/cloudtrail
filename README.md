@@ -56,6 +56,12 @@ filter {
      source => "message"
   }
 
+  split {
+   field => "Records"
+  }
+
+}
+
 }
 
 output {
