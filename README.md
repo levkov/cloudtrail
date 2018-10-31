@@ -52,15 +52,14 @@ input {
 }
 
 filter {
-  json  {
-     source => "message"
-  }
+
+    json  {
+        source => "message"
+    }
 
   split {
-   field => "Records"
+       field => "Records"
   }
-
-}
 
 }
 
