@@ -85,7 +85,6 @@ The first key (config_params) is mandatory while the other two are optional.
 {
     "@timestamp": "2017 - 04 - 03 T18: 44: 28.591 Z",
     "@version": "1",
-    "host": "test-host",
     "message": {
     }
    "Records": []
