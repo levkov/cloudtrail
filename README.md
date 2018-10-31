@@ -36,7 +36,7 @@ https://www.elastic.co/guide/en/logstash/current/dir-layout.html
 
 ### Configuration
 
-Open your Logstash configuration file and add AWS Kinesis input and Coralogix output. (More information about Logstash Input Kinesis plugin: https://www.elastic.co/guide/en/logstash/current/plugins-inputs-kinesis.html)
+Open your Logstash configuration file and add AWS S3 input and Coralogix output. (More information about Logstash Input S3 plugin: https://www.elastic.co/guide/en/logstash/current/plugins-inputs-s3.html)
 
 ```javascript
 input {
@@ -45,7 +45,7 @@ input {
     "secret_access_key" => "XXXXXXXX"
     "bucket" => "BUCKET NAME"
     "region" => "us-east-1"
-    "prefix" => "PREFIX/AWSLogs/ACCOUNT/CloudTrail/us-east-1/"
+    "prefix" => "PREFIX/AWSLogs/ACCOUNT/CloudTrail/REGION/"
     "delete" => true
 
   }
@@ -87,14 +87,12 @@ The first key (config_params) is mandatory while the other two are optional.
     "@version": "1",
     "host": "test-host",
     "message": {
-        "system": "nginx",
-        "status": "OK",
-        "msg": "Hello from Logstash"
     }
+   "Records": []
 }
 ```
 Because your AWS CloudTrail logs are JSON object, in the case you don’t want to send the entire JSON, rather just a portion of it, you can write the value of the key you want to send in the log_key_name.
 
-For instance, in the above example, if you write log_key_name message then only the value of message key will be sent to Coralogix. If you do want to send the entire message then you can just delete this key.
+For instance, in the above example, if you write log_key_name [Records][sourceIPAddress] then only the value of [Records][sourceIPAddress] key will be sent to Coralogix. If you do want to send the entire message then you can just delete this key.
 
 Restart Logstash.
